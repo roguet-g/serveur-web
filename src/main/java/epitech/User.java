@@ -19,7 +19,7 @@ public @Data class User {
         this._email = email;
     }
 
-    public static Object getHtml() {
+    public static Object getHTML() {
         User usr = new User(0, "TotallyGenericUserName", "user@domain");
 
         return body().with(
@@ -28,6 +28,6 @@ public @Data class User {
     }
 
     public static Object getJSON() {
-        return new User(0, "SomeRandomUser", "user@domain");
+        return "{}";
     }
 }

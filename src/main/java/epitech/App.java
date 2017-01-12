@@ -1,34 +1,41 @@
 package epitech;
 
 import org.jooby.Jooby;
+import org.jooby.Result;
+import org.jooby.Results;
+import org.jooby.Status;
 
 /**
  * @author jooby generator
  */
 public class App extends Jooby {
     {
-        /** Examples **/
+        // Examples
         get("/login", () -> "login page");
         get("/", () -> "Hello World!");
         get("/coucou", Feed::coucou);
-        /** Connection **/
+        // Connection
         get("/connection", () -> "GET Connection");
         post("/connection", () -> "POST Connection");
         delete("/connection", () -> "DELETE Connection");
-        /** Feeds **/
+        // Feeds
         get("/allfeeds", () -> "GET All feeds");
         get("/feed/:from/:count", req -> "GET Feeds "+ req.param("from").intValue() +" index until "+ req.param("from").intValue() +" + "+ req.param("count").intValue());
         get("/feed/:id", req -> "GET Feed " + req.param("id").intValue());
         post("/feed", () -> "POST new feed");
         put("/feed/:id", req -> "PUT feed with " + req.param("id").intValue());
         delete("/feed/:id", req -> "DELETE feed with " + req.param("id").intValue());
-        /** Categories **/
+        // Categories
         get("/category", () -> "GET Categories");
         get("/category/:id", req -> "GET Categorie with " + req.param("id").intValue());
         put("/category/:id", req -> "PUT Categorie with " + req.param("id").intValue());
         delete("/category/:id", req -> "DELETE Categorie with " + req.param("id").intValue());
-        /** User **/
-        get("/user", () -> "GET User");
+        // User
+        get("/user", () -> Results
+                .when("text/html", User::getHTML)
+                .when("application/json", User::getJSON)
+                .when("*", () -> Status.NOT_ACCEPTABLE)
+        );
         post("/user", () -> "POST User");
         put("/user", () -> "PUT User");
         delete("/user/:id", req -> "DELETE User with " + req.param("id").intValue());
