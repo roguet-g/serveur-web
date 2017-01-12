@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/../server/target/classes" />
-    <output-test url="file://$MODULE_DIR$/../server/target/test-classes" />
-    <exclude-output />
-    <content url="file://$MODULE_DIR$/../server">
-      <sourceFolder url="file://$MODULE_DIR$/../server/conf" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../server/public" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../server/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../server/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/../server/target/generated-sources" isTestSource="false" />
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/conf" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/public" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -53,24 +52,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.groovy:groovy-json:2.4.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:rest-assured-common:3.0.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.rest-assured:xml-path:3.0.1" level="project" />
-    <orderEntry type="library" name="Maven: rome:rome:1.0" level="project" />
-    <orderEntry type="library" name="Maven: jdom:jdom:1.0" level="project" />
-    <orderEntry type="library" name="Maven: com.j2html:j2html:0.7" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
-    <orderEntry type="library" name="Maven: com.google.javascript:closure-compiler:v20150901" level="project" />
-    <orderEntry type="library" name="Maven: com.google.javascript:closure-compiler-externs:v20150901" level="project" />
-    <orderEntry type="library" name="Maven: args4j:args4j:2.0.26" level="project" />
-    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:2.5.0" level="project" />
-    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.6.2" level="project" />
-    <orderEntry type="library" name="Maven: com.google.code.findbugs:jsr305:3.0.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jooby:jooby-servlet:1.0.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.avaje.ebeanorm:avaje-ebeanorm-agent:4.9.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: javax.persistence:persistence-api:1.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.avaje:avaje-agentloader:2.1.2" level="project" />
-    <orderEntry type="library" name="Maven: com.querydsl:querydsl-jpa:4.0.9" level="project" />
-    <orderEntry type="library" name="Maven: com.querydsl:querydsl-core:4.0.9" level="project" />
-    <orderEntry type="library" name="Maven: com.mysema.commons:mysema-commons-lang:0.2.4" level="project" />
-    <orderEntry type="library" name="Maven: com.infradna.tool:bridge-method-annotation:1.13" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
   </component>
 </module>
