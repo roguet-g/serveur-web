@@ -1,15 +1,49 @@
 package epitech;
 
+import epitech.Model.UserRepository;
 import org.jooby.Jooby;
 import org.jooby.Result;
 import org.jooby.Results;
 import org.jooby.Status;
+import org.jooby.jdbi.Jdbi;
+import org.jooby.json.Jackson;
+import org.skife.jdbi.v2.DBI;
+import org.skife.jdbi.v2.Handle;
+import com.typesafe.config.Config;
+
+import java.util.List;
 
 /**
  * @author jooby generator
  */
 public class App extends Jooby {
     {
+        //Database connection
+        use(new Jackson());
+        use(new Jdbi()
+          // 1 dbi ready
+          .doWith((DBI dbi, Config conf) -> {
+              // 2 open a new handle
+              try (Handle handle = dbi.open()) {
+                  // 3. execute script
+                  handle.execute(conf.getString("schema"));
+              }
+          }));
+
+        // Databases Request Example
+        get("/db/test", req -> {
+            // 1 get dbi and start a new transaction
+            return require(DBI.class).inTransaction((handle, status) -> {
+                // 2 attach the repository to jdbi handle
+                UserRepository repo = handle.attach(UserRepository.class);
+
+                // 3 list all pets
+                List<epitech.Model.User> pets = repo.list();
+                return pets;
+            });
+        });
+
+
         // Examples
         get("/login", () -> "login page");
         get("/", () -> "Hello World!");
