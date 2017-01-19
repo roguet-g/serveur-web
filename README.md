@@ -1,6 +1,7 @@
 # serveur-web
-Serveur Web Java Project Epitech
+## Serveur Web Java Project Epitech
 
+### PostGresql Docker
 To run postgresql launch the docker-run.sh
 or if it doesnt work, have a look and copy past the docker run command in your cmd/tty.
 
@@ -11,13 +12,19 @@ The default databases is epirss
 You're free to run with your db in the project ! :)
 
 
-!! HAVE A LOOK IN application.conf for schema line:
-schema = """CREATE TABLE  IF NOT EXISTS user_rss (
-    id        integer,
-    name       varchar(40)
-);"""
-YOU MAY WANT PUT SOME CODE THERE. !!
+#### HAVE A LOOK IN application.conf
 
-Docker command:
+for schema line:
+
+
+    schema = """CREATE TABLE  IF NOT EXISTS user_rss (
+      id        integer,
+      name       varchar(40)
+    );"""
+
+##### YOU MAY WANT PUT SOME CODE THERE.
+
+
+## Docker command:
 
   docker pull lumy/serveur-web
