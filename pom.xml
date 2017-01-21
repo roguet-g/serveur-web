@@ -103,8 +103,6 @@
       <artifactId>pgjdbc-ng</artifactId>
       <version>0.6</version>
     </dependency>
-
-
     <!-- Lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -112,16 +110,6 @@
       <version>1.16.12</version>
       <scope>provided</scope>
     </dependency>
-
-    <!-- RSS Atom -->
-    <dependency>
-    <groupId>rome</groupId>
-    <artifactId>rome</artifactId>
-
-    <version>1.0</version>
-  </dependency>
-
-
 </dependencies>
 
 
