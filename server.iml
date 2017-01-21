@@ -72,6 +72,9 @@
     <orderEntry type="library" name="Maven: org.jooby:jooby-jdbc:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:2.5.1" level="project" />
     <orderEntry type="library" name="Maven: org.jdbi:jdbi:2.72" level="project" />
+    <orderEntry type="library" name="Maven: org.jooby:jooby-pac4j:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.pac4j:pac4j-core:1.9.4" level="project" />
+    <orderEntry type="library" name="Maven: org.pac4j:pac4j-http:1.9.4" level="project" />
     <orderEntry type="library" name="Maven: com.h2database:h2:1.4.190" level="project" />
     <orderEntry type="library" name="Maven: org.postgresql:postgresql:unknown" level="project" />
     <orderEntry type="library" name="Maven: com.impossibl.pgjdbc-ng:pgjdbc-ng:0.6" level="project" />

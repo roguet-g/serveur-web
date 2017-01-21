@@ -15,7 +15,7 @@ import org.skife.jdbi.v2.sqlobject.helpers.MapResultAsBean;
 
   /**
    *
-   * Basic CRUD operations around {@link Pet}.
+   * Basic CRUD operations around {@link User}.
    */
   public interface UserRepository extends Closeable {
 

@@ -85,6 +85,11 @@
       <artifactId>jooby-jdbi</artifactId>
       <version>1.0.1</version>
     </dependency>
+    <dependency> <!-- Jooby Auth Secure -->
+      <groupId>org.jooby</groupId>
+      <artifactId>jooby-pac4j</artifactId>
+      <version>1.0.1</version>
+    </dependency>
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
@@ -108,7 +113,18 @@
       <scope>provided</scope>
     </dependency>
 
-  </dependencies>
+    <!-- RSS Atom -->
+    <dependency>
+    <groupId>rome</groupId>
+    <artifactId>rome</artifactId>
+
+    <version>1.0</version>
+  </dependency>
+
+
+</dependencies>
+
+
 
   <build>
     <plugins>

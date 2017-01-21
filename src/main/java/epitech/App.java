@@ -1,12 +1,19 @@
 package epitech;
 
+import epitech.Model.Flux;
+import epitech.Model.FluxRepository;
 import epitech.Model.UserRepository;
 import org.jooby.Jooby;
 import org.jooby.Result;
+import org.pac4j.http.client.indirect.FormClient;
+import org.pac4j.http.credentials.authenticator.test.SimpleTestUsernamePasswordAuthenticator;
+//import org.pac4j.jwt.profile.JwtGenerator;
 import org.jooby.Results;
 import org.jooby.Status;
 import org.jooby.jdbi.Jdbi;
 import org.jooby.json.Jackson;
+import org.jooby.pac4j.Auth;
+import org.pac4j.core.profile.UserProfile;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.Handle;
 import com.typesafe.config.Config;
@@ -26,7 +33,8 @@ public class App extends Jooby {
               // 2 open a new handle
               try (Handle handle = dbi.open()) {
                   // 3. execute script
-                  handle.execute(conf.getString("schema"));
+                  handle.execute(conf.getString("schema_user"));
+                  handle.execute(conf.getString("schema_flux"));
               }
           }));
 
@@ -44,14 +52,31 @@ public class App extends Jooby {
         });
 
 
+        get("/", () -> "Hello World!");
+        post("/test/add_flux", req ->  Results
+            .when("text/html", () -> Status.NOT_ACCEPTABLE)
+            .when("application/json", () -> require(DBI.class).inTransaction((handle, status) -> {
+                Flux f = req.body(Flux.class);
+                return RomeExample.addFlux(handle, f);
+            }))
+            .when("*", () -> Status.NOT_ACCEPTABLE));
+
+
+        get("/test/get_flux", () -> require(DBI.class).inTransaction((handle, status) -> {
+        // 2 attach the repository to jdbi handle
+          return RomeExample.getFlux(handle);
+        }));
+
+        // Connection
+//        get("/connection", () -> "GET Connection");
+//        post("/connection", () -> "POST Connection");
+//        delete("/connection", () -> "DELETE Connection");
+      //  FormClient formClient = new FormClient("/theForm.jsp", new SimpleTestUsernamePasswordAuthenticator(), new UsernameProfileCreator());
+        use(new Auth()); // .store(UserRepository.class); //.basic("*", MyUsernamePasswordAuthenticator.class));
+
         // Examples
         get("/login", () -> "login page");
-        get("/", () -> "Hello World!");
         get("/coucou", Feed::coucou);
-        // Connection
-        get("/connection", () -> "GET Connection");
-        post("/connection", () -> "POST Connection");
-        delete("/connection", () -> "DELETE Connection");
         // Feeds
         get("/allfeeds", () -> "GET All feeds");
         get("/feed/:from/:count", req -> "GET Feeds "+ req.param("from").intValue() +" index until "+ req.param("from").intValue() +" + "+ req.param("count").intValue());
@@ -73,10 +98,13 @@ public class App extends Jooby {
         post("/user", () -> "POST User");
         put("/user", () -> "PUT User");
         delete("/user/:id", req -> "DELETE User with " + req.param("id").intValue());
+
     }
 
   public static void main(final String[] args) {
         run(App::new, args);
   }
+
+
 
 }
