@@ -35,6 +35,7 @@ public class App extends Jooby {
                   // 3. execute script
                   handle.execute(conf.getString("schema_user"));
                   handle.execute(conf.getString("schema_flux"));
+                  handle.execute(conf.getString("schema_feed"));
               }
           }));
 
@@ -85,7 +86,15 @@ public class App extends Jooby {
             }));
 
 
-
+        get("/test/feeds", req ->
+          Results
+            .when("application/json, application/*+json", () ->
+                require(DBI.class).inTransaction((handle, status) -> {
+                  int id = req.param("id").intValue();
+                  return RomeExample.syncFlux(handle, id);
+                }))
+            .when("*", () -> Status.NOT_ACCEPTABLE)
+        );
 
       // Connection
 //        get("/connection", () -> "GET Connection");

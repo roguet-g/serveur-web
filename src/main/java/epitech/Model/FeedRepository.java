@@ -35,7 +35,7 @@ public interface FeedRepository extends Closeable {
    */
   @SqlQuery("select * from feed where uid = :uid")
   @MapResultAsBean
-  User findById(@Bind("uid") Integer uid);
+  Feed findById(@Bind("uid") Integer uid);
 
   /**
    *
@@ -44,8 +44,16 @@ public interface FeedRepository extends Closeable {
    * @param f A feed.
    * @return The generated key.
    */
-  @SqlUpdate("insert into feed (name) values (:f.category, f.title, f.url, f.description, f.published)")
+  @SqlUpdate("insert into feed (title, category, urlFeed, urlFlux, description, content, published, author) values" +
+    "(:f.title, :f.category, :f.urlFeed, :f.urlFlux, :f.description, :f.content, :f.published, :f.author)")
   @GetGeneratedKeys
   int insert(@BindBean("f") Feed f);
 
+  @SqlQuery("select * from feed where urlFeed = :feed.urlFeed")
+  @MapResultAsBean
+  Feed findByUrl(@BindBean("feed") Feed feed);
+
+  @SqlQuery("select * from feed where urlFlux = :urlFlux")
+  @MapResultAsBean
+  List<Feed> allByUrl(@Bind("urlFlux") String urlFlux);
 }

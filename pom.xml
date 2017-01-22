@@ -56,7 +56,11 @@
       <artifactId>rome</artifactId>
       <version>1.0</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.2</version>
+    </dependency>
     <!-- J2html - html dans le java en classe -->
     <dependency>
       <groupId>com.j2html</groupId>

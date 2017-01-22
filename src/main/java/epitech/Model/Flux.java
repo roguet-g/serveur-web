@@ -8,15 +8,17 @@ import com.sun.syndication.feed.synd.SyndFeed;
 public class Flux {
   private Integer uid;
   private String title;
-  private String url;
+  private String urlFlux;
+  private String urlSite;
   private Integer category;
   private String description;
   private String imageUrl;
 
 
-  public Flux(SyndFeed f) {
+  public Flux(String url, SyndFeed f) {
     setTitle(f.getTitle());
-    setUrl(f.getLink());
+    setUrlFlux(url);
+    setUrlSite(f.getLink());
     if (null != f.getImage()) {
       setImageUrl(f.getImage().getUrl());
     }
@@ -49,14 +51,6 @@ public class Flux {
     this.title = title;
   }
 
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
   public String getDescription() {
     return description;
   }
@@ -71,5 +65,21 @@ public class Flux {
 
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
+  }
+
+  public String getUrlFlux() {
+    return urlFlux;
+  }
+
+  public void setUrlFlux(String urlFeed) {
+    this.urlFlux = urlFeed;
+  }
+
+  public String getUrlSite() {
+    return urlSite;
+  }
+
+  public void setUrlSite(String urlSite) {
+    this.urlSite = urlSite;
   }
 }

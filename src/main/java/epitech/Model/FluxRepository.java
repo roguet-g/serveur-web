@@ -43,7 +43,7 @@ import org.skife.jdbi.v2.sqlobject.helpers.MapResultAsBean;
    * @param url flux url.
    * @return A flux.
    */
-  @SqlQuery("select * from flux where url = :url")
+  @SqlQuery("select * from flux where urlFlux = :url or urlSite = :url")
   @MapResultAsBean
   Flux findByUrl(@Bind("url") String url);
   /**
@@ -53,7 +53,7 @@ import org.skife.jdbi.v2.sqlobject.helpers.MapResultAsBean;
    * @param f A flux.
    * @return The generated key.
    */
-  @SqlUpdate("insert into flux (title, url, category, description, imageurl) values (:f.title, :f.url, :f.category, :f.description, :f.imageUrl)")
+  @SqlUpdate("insert into flux (title, urlSite, urlFlux, category, description, imageurl) values (:f.title, :f.urlSite, :f.urlFlux, :f.category, :f.description, :f.imageUrl)")
   @GetGeneratedKeys
   int insert(@BindBean("f") Flux f);
   }

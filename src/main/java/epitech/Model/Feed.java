@@ -1,5 +1,7 @@
 package epitech.Model;
 
+import com.sun.syndication.feed.synd.SyndEntry;
+
 import java.util.Date;
 
 /**
@@ -9,9 +11,33 @@ public class Feed {
   private Integer uid;
   private Integer category;
   private String title;
-  private String url;
+  private String urlFeed;
+  private String urlFlux;
   private String description;
+  private String content;
   private Date   published;
+  private String  author;
+
+  // Should be saving that
+  // entry.getCategories()
+  // Saving one or the other entry.getLink() || entry.getUri()
+//  System.out.println("Author: " + entry.getTitle());
+//        System.out.println("Publish Date: " + entry.getPublishedDate());
+//        System.out.println("Description: " + entry.getDescription().getValue());
+//        System.out.println("Content: " + entry.getContents());
+
+  public Feed(String urlFlux, SyndEntry entry) {
+    setTitle(entry.getTitle());
+    setUrlFeed(entry.getLink());
+    setDescription(entry.getDescription().getValue());
+    setContent(entry.getContents().get(0).toString());
+    setPublished(entry.getPublishedDate());
+    setAuthor(entry.getAuthor());
+    setUrlFlux(urlFlux);
+  }
+  public Feed() {
+
+  }
 
   public Integer getUid() {
     return uid;
@@ -37,14 +63,6 @@ public class Feed {
     this.title = title;
   }
 
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
   public String getDescription() {
     return description;
   }
@@ -59,5 +77,37 @@ public class Feed {
 
   public void setPublished(Date published) {
     this.published = published;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  public String getAuthor() {
+    return author;
+  }
+
+  public void setAuthor(String author) {
+    this.author = author;
+  }
+
+  public String getUrlFeed() {
+    return urlFeed;
+  }
+
+  public void setUrlFeed(String urlFeed) {
+    this.urlFeed = urlFeed;
+  }
+
+  public String getUrlFlux() {
+    return urlFlux;
+  }
+
+  public void setUrlFlux(String urlFlux) {
+    this.urlFlux = urlFlux;
   }
 }
