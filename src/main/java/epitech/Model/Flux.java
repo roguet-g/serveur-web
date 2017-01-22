@@ -17,7 +17,9 @@ public class Flux {
   public Flux(SyndFeed f) {
     setTitle(f.getTitle());
     setUrl(f.getLink());
-    setImageUrl(f.getImage().getUrl());
+    if (null != f.getImage()) {
+      setImageUrl(f.getImage().getUrl());
+    }
     setDescription(f.getDescription());
   }
   public Flux() {

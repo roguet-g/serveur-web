@@ -22,6 +22,17 @@ import org.skife.jdbi.v2.Handle;
 
 public class RomeExample {
 
+  public static List<Flux> getFlux(DBI dbi) {
+   return dbi.inTransaction((handle, status) -> {
+      // 2 attach the repository to jdbi handle
+     FluxRepository repo = handle.attach(FluxRepository.class);
+
+      // 3 list all pets
+      List<epitech.Model.Flux> pets = repo.list();
+      return pets;
+  });
+  }
+
   public static List<Flux> getFlux(Handle handle) {
     FluxRepository repo = handle.attach(FluxRepository.class);
     // 3 list all pets

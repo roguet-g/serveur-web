@@ -52,7 +52,26 @@ public class App extends Jooby {
         });
 
 
-        get("/", () -> "Hello World!");
+        get("/", (req, rsp) -> rsp.send("Hello World!"));
+
+        get("/test/get_flux", (req, rsp) -> {
+            rsp.status(301).type("application/json, application/*+json").send(RomeExample.getFlux(require(DBI.class)));
+          });
+//            .when("application/json, application/*+json", () ->
+//              require(DBI.class).inTransaction((handle, status) -> {
+//                try {
+//                  System.out.println("Ta Mere ?");
+//                  rsp.status(301).type("application/json").send(RomeExample.getFlux(handle));
+//                } catch (Throwable throwable) {
+//                  throwable.printStackTrace();
+//                }
+//                System.out.println("Ta Mere ?");
+//                return RomeExample.getFlux(handle);
+//              }))
+//            .when("*", () -> {
+//              System.out.println(req.headers());
+//              return Status.NOT_ACCEPTABLE;
+//            });});
 
         post("/test/add_flux", req ->  Results
             .when("application/json, application/*+json", () ->
@@ -66,19 +85,6 @@ public class App extends Jooby {
             }));
 
 
-        get("/test/get_flux", req ->  Results
-          .when("application/json, application/*+json", () ->
-               require(DBI.class).inTransaction((handle, status) -> {
-                 System.out.println("Ici La Lune");
-                 List<Flux> res = restTemplate.getForObject("http://127.0.0.1:8080/test/get_flux", List.class);
-                 rsp.status(200)
-                   .type("text/plain")
-                   .send(RomeExample.getFlux(handle));
-          }))
-          .when("*", () -> {
-            System.out.println(req.headers());
-            return Status.NOT_ACCEPTABLE;
-          }));
 
 
       // Connection
