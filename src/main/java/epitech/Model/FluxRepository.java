@@ -53,7 +53,7 @@ import org.skife.jdbi.v2.sqlobject.helpers.MapResultAsBean;
    * @param f A flux.
    * @return The generated key.
    */
-  @SqlUpdate("insert into flux (category, title, url) values (:f.category, :f.title, :f.url)")
+  @SqlUpdate("insert into flux (title, url, category, description, imageurl) values (:f.title, :f.url, :f.category, :f.description, :f.imageUrl)")
   @GetGeneratedKeys
   int insert(@BindBean("f") Flux f);
-}
+  }

@@ -26,16 +26,37 @@ public class RomeExample {
     FluxRepository repo = handle.attach(FluxRepository.class);
     // 3 list all pets
     List<epitech.Model.Flux> f = repo.list();
+    System.out.println("Ta mere " + f);
     return f;
   }
-  public static SimpleResponse addFlux(Handle handle, Flux f) {
+  public static Flux addFlux(Handle handle, Flux f) {
+    System.out.println("Received Flux " + f);
     FluxRepository repo = handle.attach(FluxRepository.class);
-    if (null != repo.findByUrl(f.getUrl())) {
-      return new SimpleResponse(1);
+    Flux check = null;
+    if (null != (check = repo.findByUrl(f.getUrl())))
+      return check;
+    SyndFeed r = null;
+    if (null == (r = sync_flux(f)))
+      return f;
+    f = new Flux(r);
+    int key = repo.insert(f);
+    f.setUid(key);
+    return f;
+  }
+  public static SyndFeed sync_flux(Flux f) {
+    try {
+      URL url = new URL(f.getUrl()); //http://www.lemonde.fr/rss/une.xml"); //http://www.ywh.me/rss"); // korben.info/feed");
+      HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
+      httpcon.addRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+      SyndFeedInput input = new SyndFeedInput();
+      SyndFeed feed = input.build(new XmlReader(httpcon));
+      return feed;
+
+    } catch (Exception e) {
+      System.out.println("EXCEPTIOOOOON");
+      e.printStackTrace();
+      return null;
     }
-    repo.insert(f);
-    // 3 list all pets
-    return new SimpleResponse(0);
   }
 
   public static String test() throws Exception {

@@ -1,13 +1,27 @@
 package epitech.Model;
 
+import com.sun.syndication.feed.synd.SyndFeed;
+
 /**
  * Created by lumy on 21/01/2017.
  */
 public class Flux {
   private Integer uid;
-  private Integer category;
   private String title;
   private String url;
+  private Integer category;
+  private String description;
+  private String imageUrl;
+
+
+  public Flux(SyndFeed f) {
+    setTitle(f.getTitle());
+    setUrl(f.getLink());
+    setImageUrl(f.getImage().getUrl());
+    setDescription(f.getDescription());
+  }
+  public Flux() {
+  }
 
   public Integer getUid() {
     return uid;
@@ -39,5 +53,21 @@ public class Flux {
 
   public void setUrl(String url) {
     this.url = url;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
   }
 }

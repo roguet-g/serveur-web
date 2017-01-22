@@ -53,21 +53,35 @@ public class App extends Jooby {
 
 
         get("/", () -> "Hello World!");
+
         post("/test/add_flux", req ->  Results
-            .when("text/html", () -> Status.NOT_ACCEPTABLE)
-            .when("application/json", () -> require(DBI.class).inTransaction((handle, status) -> {
+            .when("application/json, application/*+json", () ->
+                require(DBI.class).inTransaction((handle, status) -> {
                 Flux f = req.body(Flux.class);
                 return RomeExample.addFlux(handle, f);
             }))
-            .when("*", () -> Status.NOT_ACCEPTABLE));
+            .when("*", () -> {
+              System.out.println(req.headers());
+              return Status.NOT_ACCEPTABLE;
+            }));
 
 
-        get("/test/get_flux", () -> require(DBI.class).inTransaction((handle, status) -> {
-        // 2 attach the repository to jdbi handle
-          return RomeExample.getFlux(handle);
-        }));
+        get("/test/get_flux", req ->  Results
+          .when("application/json, application/*+json", () ->
+               require(DBI.class).inTransaction((handle, status) -> {
+                 System.out.println("Ici La Lune");
+                 List<Flux> res = restTemplate.getForObject("http://127.0.0.1:8080/test/get_flux", List.class);
+                 rsp.status(200)
+                   .type("text/plain")
+                   .send(RomeExample.getFlux(handle));
+          }))
+          .when("*", () -> {
+            System.out.println(req.headers());
+            return Status.NOT_ACCEPTABLE;
+          }));
 
-        // Connection
+
+      // Connection
 //        get("/connection", () -> "GET Connection");
 //        post("/connection", () -> "POST Connection");
 //        delete("/connection", () -> "DELETE Connection");
